@@ -95,6 +95,9 @@ public class Auto69 extends LinearOpMode {
 
         robot.leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backleftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backrightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
