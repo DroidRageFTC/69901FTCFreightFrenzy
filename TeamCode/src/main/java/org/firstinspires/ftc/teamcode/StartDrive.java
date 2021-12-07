@@ -84,6 +84,7 @@ public class StartDrive extends OpMode{
         robot.backrightDrive.setPower(rightPower);
         robot.rightDrive.setPower(rightPower);
         robot.Carousel.setPower(rotate);
+     
         // Use gamepad left & right Bumpers to open and close the claw
         if (gamepad2.right_bumper)
             clawOffset += CLAW_SPEED;
