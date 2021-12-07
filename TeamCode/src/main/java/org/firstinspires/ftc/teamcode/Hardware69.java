@@ -84,7 +84,7 @@ public class Hardware69
             backleftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             backrightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            leftArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
            /* leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backleftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
