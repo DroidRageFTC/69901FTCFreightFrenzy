@@ -36,6 +36,7 @@ public class Hardware69 {
     public DcMotor backrightDrive = null;
     public DcMotor Carousel = null;
     public DcMotor Intake = null;
+    public Servo armIntake = null;
 
     public static final double MID_SERVO = 0.9;
     public static final double ARM_UP_POWER = 0.45;
@@ -62,7 +63,8 @@ public class Hardware69 {
         backrightDrive = hwMap.get(DcMotor.class, "BR_drive");
         Arm = hwMap.get(DcMotor.class, "Arm");
         Carousel = hwMap.get(DcMotor.class, "Rotate");
-        Intake   = hwMap.get(DcMotor.class,"Drop")
+        Intake   = hwMap.get(DcMotor.class,"Drop");
+        armIntake = hwMap.get(Servo.class,"armIntake");
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
@@ -85,6 +87,7 @@ public class Hardware69 {
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backrightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
            /* leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backleftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

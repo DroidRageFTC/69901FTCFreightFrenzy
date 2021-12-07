@@ -30,7 +30,7 @@ public class StartDrive extends OpMode{
     Hardware69 robot       = new Hardware69(); // use the class created to define a Pushbot's hardware
     double          clawOffset  = 0.0 ;                  // Servo mid position
     final double    CLAW_SPEED  = 0.5 ;                 // sets rate to move servo
-
+    double          ServoSpeed = 0.7;       //Speed of a servo
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -95,13 +95,21 @@ public class StartDrive extends OpMode{
         robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
         robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
 
-        // Use gamepad buttons to move the arm up (Y) and down (A)
+        // Use gamepad buttons to move the arm by the dpad
         if (gamepad2.dpad_up)
             robot.Arm.setPower(robot.ARM_UP_POWER);
         else if (gamepad2.dpad_down)
             robot.Arm.setPower(robot.ARM_DOWN_POWER);
         else
             robot.Arm.setPower(0.0);
+
+        //takes the drop or lifts it based on y(up) and b(down)
+        if (gamepad2.y)
+                robot.armIntake.setPosition(0.8);
+        else if (gamepad2.b)
+                robot.armIntake.setPosition(0.2);
+            else
+                robot.Arm.setPower(0.0);
 
 
 
