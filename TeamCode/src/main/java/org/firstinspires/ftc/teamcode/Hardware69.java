@@ -35,6 +35,7 @@ public class Hardware69 {
     public DcMotor Intake = null;
     public Servo Intakeservo = null;
     public Servo Drop = null;
+    public Servo Stick = null;
 
     public static final double MID_SERVO = 0.9;
     public static final double ARM_UP_POWER = 0.45;
@@ -64,6 +65,7 @@ public class Hardware69 {
         Intake   = hwMap.get(DcMotor.class,"Intake");
         Intakeservo = hwMap.get(Servo.class,"Intakeservo");
         Drop = hwMap.get(Servo.class,"Drop");
+        Stick = hwMap.get(Servo.class,"Stick")
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors

@@ -81,7 +81,7 @@ public class StartDrive extends OpMode{
         robot.backrightDrive.setPower(rightPower);
         robot.rightDrive.setPower(rightPower);
 
-
+        //Carsouel moves based on left or right trigger
         if (gamepad2.right_trigger >= 0.1)
                 robot.Carousel.setPower(0.4);
         if (gamepad2.left_trigger >= 0.1)
@@ -92,9 +92,9 @@ public class StartDrive extends OpMode{
         // Use gamepad buttons to move the arm by the left stick
         if (gamepad2.left_stick_y > 0.1)
             robot.Arm.setPower(0.4);
-        else if (gamepad2.left_stick_y)
+        else if (gamepad2.left_stick_y>0.5)
             robot.Arm.setPower(-0.4);
-        else if (gamepad2.left_stick_y && gamepad2.left_stick_y)
+        else if (gamepad2.left_stick_y == 0)
             robot.Arm.setPower(0.0);
 
         //takes the drop or lifts it based on right bumper (up) and left bumper (down)
@@ -102,7 +102,7 @@ public class StartDrive extends OpMode{
                 robot.Intake.setPower(0.8);
         else if (gamepad1.left_bumper)
                 robot.Intake.setPower(-0.8);
-        else if (!gamepad1.right_bumper && !gamepad1.left_bumper)
+        else
             robot.Intake.setPower(0.0);
         // Intake servo Controls
 
@@ -122,7 +122,12 @@ public class StartDrive extends OpMode{
         else if (gamepad2.y)
             robot.Intakeservo.setPosition (0.2);
 
-
+        if(gamepad2.right_bumper)
+            robot.Stick.setPosition(0);
+        else if (gamepad2.left_bumper)
+            robot.Stick.setPosition (0.2);
+        else
+            robot.Stick.setPosition (0.2);
         // Send telemetry message to signify robot running;
         telemetry.addData("claw",  "Offset = %.2f", clawOffset);
         telemetry.addData("left",  "%.2f", leftPower);
