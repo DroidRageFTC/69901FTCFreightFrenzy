@@ -75,39 +75,52 @@ public class StartDrive extends OpMode{
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
-        
+
         robot.leftDrive.setPower(leftPower);
         robot.backleftDrive.setPower(leftPower);
         robot.backrightDrive.setPower(rightPower);
         robot.rightDrive.setPower(rightPower);
-        robot.Carousel.setPower(rotate);
-     
 
 
+        if (gamepad2.right_trigger >= 0.1)
+                robot.Carousel.setPower(0.4);
+        if (gamepad2.left_trigger >= 0.1)
+            robot.Carousel.setPower(-0.4);
+        else if (gamepad2.right_trigger < 0.1 && gamepad2.left_trigger < 0.1)
+            robot.Carousel.setPower(0.0);
 
-
-        // Use gamepad buttons to move the arm by the dpad
-        if (gamepad2.dpad_up)
-            robot.Arm.setPower(robot.ARM_UP_POWER);
-        else if (gamepad2.dpad_down)
-            robot.Arm.setPower(robot.ARM_DOWN_POWER);
-        else if (!gamepad2.dpad_down && !gamepad2.dpad_up)
+        // Use gamepad buttons to move the arm by the left stick
+        if (gamepad2.left_stick_y > 0.1)
+            robot.Arm.setPower(0.4);
+        else if (gamepad2.left_stick_y)
+            robot.Arm.setPower(-0.4);
+        else if (gamepad2.left_stick_y && gamepad2.left_stick_y)
             robot.Arm.setPower(0.0);
 
-        //takes the drop or lifts it based on y(up) and b(down)
-        if (gamepad1.y)
-                robot.Intake.setPower(0.8);
-        else if (gamepad1.b)
-                robot.Intake.setPower(0);
-
-
+        //takes the drop or lifts it based on right bumper (up) and left bumper (down)
         if (gamepad1.right_bumper)
-            robot.Drop.setPosition(0);
+                robot.Intake.setPower(0.8);
         else if (gamepad1.left_bumper)
-            robot.Drop.setPosition(.5);
+                robot.Intake.setPower(-0.8);
+        else if (!gamepad1.right_bumper && !gamepad1.left_bumper)
+            robot.Intake.setPower(0.0);
+        // Intake servo Controls
 
 
+        /*if (gamepad1.right_bumper)
+            robot.Drop.setPosition(0.5);
+        else if (gamepad1.left_bumper)
+            robot.Drop.setPosition(0);
+*/
+        if (gamepad1.a)
+            robot.Drop.setPosition(-0.5);
+        else if (gamepad1.b)
+            robot.Drop.setPosition(0.5);
 
+        if (gamepad2.a)
+            robot.Intakeservo.setPosition (-0.5);
+        else if (gamepad2.y)
+            robot.Intakeservo.setPosition (0.2);
 
 
         // Send telemetry message to signify robot running;
