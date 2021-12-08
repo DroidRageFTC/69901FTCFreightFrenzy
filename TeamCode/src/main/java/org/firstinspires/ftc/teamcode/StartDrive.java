@@ -73,15 +73,16 @@ public class StartDrive extends OpMode{
         double drive =- gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
         double rotate = gamepad2.right_trigger;
-         ArmPower = gamepad2.left_stick_y;
+        double Lift = gamepad2.left_stick_y;
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
-
+        ArmPower = Range.clip(Lift, -1.0, 1.0) ;
         robot.leftDrive.setPower(leftPower);
         robot.backleftDrive.setPower(leftPower);
         robot.backrightDrive.setPower(rightPower);
         robot.rightDrive.setPower(rightPower);
+        robot.Arm.setPower(ArmPower);
 
         //Carsouel moves based on left or right trigger
         if (gamepad2.right_trigger >= 0.1)
