@@ -92,7 +92,7 @@ public class StartDrive extends OpMode{
         // Use gamepad buttons to move the arm by the left stick
         if (gamepad2.left_stick_y > 0.1)
             robot.Arm.setPower(0.4);
-        else if (gamepad2.left_stick_y>0.5)
+        else if (gamepad2.left_stick_y>-0.1)
             robot.Arm.setPower(-0.4);
         else if (gamepad2.left_stick_y == 0)
             robot.Arm.setPower(0.0);
