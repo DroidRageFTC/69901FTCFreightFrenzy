@@ -120,8 +120,7 @@ public class Auto69 extends LinearOpMode {
         encoderDrive(TURN_SPEED,   2, -2, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, -1, -1, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-        robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
-        robot.rightClaw.setPosition(0.0);
+
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");

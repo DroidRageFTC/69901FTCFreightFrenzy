@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -31,13 +29,12 @@ public class Hardware69 {
     public DcMotor leftDrive = null;
     public DcMotor rightDrive = null;
     public DcMotor Arm = null;
-    public Servo leftClaw = null;
-    public Servo rightClaw = null;
     public DcMotor backleftDrive = null;
     public DcMotor backrightDrive = null;
     public DcMotor Carousel = null;
     public DcMotor Intake = null;
-    public Servo armIntake = null;
+    public Servo Intakeservo = null;
+    public Servo Drop = null;
 
     public static final double MID_SERVO = 0.9;
     public static final double ARM_UP_POWER = 0.45;
@@ -64,8 +61,9 @@ public class Hardware69 {
         backrightDrive = hwMap.get(DcMotor.class, "BR_drive");
         Arm = hwMap.get(DcMotor.class, "Arm");
         Carousel = hwMap.get(DcMotor.class, "Rotate");
-        Intake   = hwMap.get(DcMotor.class,"Drop");
-        armIntake = hwMap.get(Servo.class,"armIntake");
+        Intake   = hwMap.get(DcMotor.class,"Intake");
+        Intakeservo = hwMap.get(Servo.class,"Intakeservo");
+        Drop = hwMap.get(Servo.class,"Drop");
 
         leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors

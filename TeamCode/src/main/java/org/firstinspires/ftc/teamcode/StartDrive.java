@@ -1,13 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
-import org.firstinspires.ftc.teamcode.Hardware69;
-    /**
+/**
      * This file provides basic Telop driving for a Pushbot robot.
      * The code is structured as an Iterative OpMode
      *
@@ -23,7 +20,7 @@ import org.firstinspires.ftc.teamcode.Hardware69;
      */
 
 @TeleOp(name="Start Drive", group="Pushbot")
-@Disabled
+
 public class StartDrive extends OpMode{
 
     /* Declare OpMode members. */
@@ -72,7 +69,7 @@ public class StartDrive extends OpMode{
         //left = -gamepad1.left_stick_y;
         //right = -gamepad1.right_stick_y;
 
-        double drive = gamepad1.left_stick_y;
+        double drive =- gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
         double rotate = gamepad2.right_trigger;
 
@@ -85,32 +82,30 @@ public class StartDrive extends OpMode{
         robot.rightDrive.setPower(rightPower);
         robot.Carousel.setPower(rotate);
      
-        // Use gamepad left & right Bumpers to open and close the claw
-        if (gamepad2.right_bumper)
-            clawOffset += CLAW_SPEED;
-        else if (gamepad2.left_bumper)
-            clawOffset -= CLAW_SPEED;
 
-        // Move both servos to new position.  Assume servos are mirror image of each other.
-        clawOffset = Range.clip(clawOffset, -0.5, 0.5);
-        robot.leftClaw.setPosition(robot.MID_SERVO + clawOffset);
-        robot.rightClaw.setPosition(robot.MID_SERVO - clawOffset);
+
+
 
         // Use gamepad buttons to move the arm by the dpad
         if (gamepad2.dpad_up)
             robot.Arm.setPower(robot.ARM_UP_POWER);
         else if (gamepad2.dpad_down)
             robot.Arm.setPower(robot.ARM_DOWN_POWER);
-        else
+        else if (!gamepad2.dpad_down && !gamepad2.dpad_up)
             robot.Arm.setPower(0.0);
 
         //takes the drop or lifts it based on y(up) and b(down)
-        if (gamepad2.y)
-                robot.armIntake.setPosition(0.8);
-        else if (gamepad2.b)
-                robot.armIntake.setPosition(0.2);
-            else
-                robot.Arm.setPower(0.0);
+        if (gamepad1.y)
+                robot.Intake.setPower(0.8);
+        else if (gamepad1.b)
+                robot.Intake.setPower(0);
+
+
+        if (gamepad1.right_bumper)
+            robot.Drop.setPosition(0);
+        else if (gamepad1.left_bumper)
+            robot.Drop.setPosition(.5);
+
 
 
 
