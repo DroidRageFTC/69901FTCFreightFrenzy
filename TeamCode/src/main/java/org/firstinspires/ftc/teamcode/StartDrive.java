@@ -76,8 +76,8 @@ public class StartDrive extends OpMode{
         double Lift = gamepad2.left_stick_y;
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-        rightPower   = Range.clip(drive - turn, -1.0, 0.5) ;
-        ArmPower = Range.clip(Lift, -1.0, 1.0) ;
+        rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+        ArmPower = Range.clip(Lift, -1.0, 0.3) ;
         robot.leftDrive.setPower(leftPower);
         robot.backleftDrive.setPower(leftPower);
         robot.backrightDrive.setPower(rightPower);
