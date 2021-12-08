@@ -64,6 +64,7 @@ public class StartDrive extends OpMode{
     {
         double leftPower;
         double rightPower;
+        double ArmPower = 0.3;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         //left = -gamepad1.left_stick_y;
@@ -72,6 +73,7 @@ public class StartDrive extends OpMode{
         double drive =- gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
         double rotate = gamepad2.right_trigger;
+         ArmPower = gamepad2.left_stick_y;
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
@@ -90,13 +92,14 @@ public class StartDrive extends OpMode{
             robot.Carousel.setPower(0.0);
 
         // Use gamepad buttons to move the arm by the left stick
+       /*
         if (gamepad2.left_stick_y > 0.1)
             robot.Arm.setPower(0.4);
         else if (gamepad2.left_stick_y>-0.1)
             robot.Arm.setPower(-0.4);
         else if (gamepad2.left_stick_y == 0)
             robot.Arm.setPower(0.0);
-
+*/
         //takes the drop or lifts it based on right bumper (up) and left bumper (down)
         if (gamepad1.right_bumper)
                 robot.Intake.setPower(0.8);
