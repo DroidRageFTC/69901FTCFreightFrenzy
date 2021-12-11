@@ -72,16 +72,27 @@ public class StartDrive extends OpMode{
 
         double drive =- gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
+        double speedMultiplier;
+
+        if (gamepad1.left_bumper) {
+            speedMultiplier = 1;
+        } else if (gamepad1.right_bumper) {
+            speedMultiplier = 0.3;
+        } else {
+            speedMultiplier = 0.6;
+        }
+
+
         double rotate = gamepad2.right_trigger;
         double Lift = gamepad2.left_stick_y;
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
      ArmPower = Range.clip(Lift, -0.2, 0.2) ;
-        robot.leftDrive.setPower(leftPower);
-        robot.backleftDrive.setPower(leftPower);
-        robot.backrightDrive.setPower(rightPower);
-        robot.rightDrive.setPower(rightPower);
+        robot.leftDrive.setPower(leftPower * speedMultiplier);
+        robot.backleftDrive.setPower(leftPower * speedMultiplier);
+        robot.backrightDrive.setPower(rightPower * speedMultiplier);
+        robot.rightDrive.setPower(rightPower * speedMultiplier);
 
         //Carsouel moves based on left or right trigger
         if (gamepad2.right_trigger >= 0.1)
@@ -92,16 +103,16 @@ public class StartDrive extends OpMode{
             robot.Carousel.setPower(0.0);
 
         // Use gamepad buttons to move the arm by the left stick
-        if (gamepad2.y) {
+        if (gamepad2.dpad_up) {
             // high
             robot.setArmPosition(0.23);
             robot.Arm.setPower(0.6);
-            robot.Intakeservo.setPosition(-0.5);
+            robot.Intakeservo.setPosition(0.6);
 
-        } else if (gamepad2.x) {
+        } else if (gamepad2.dpad_down) {
             robot.setArmPosition(0);
             robot.Arm.setPower(0);
-            robot.Intakeservo.setPosition (0.15);
+            robot.Intakeservo.setPosition (0.75);
 
         }
 
@@ -114,9 +125,9 @@ public class StartDrive extends OpMode{
 //            robot.Arm.setPower(0.0);
 
         //takes the drop or lifts it based on right bumper (up) and left bumper (down)
-        if (gamepad1.right_bumper)
+        if (gamepad1.right_trigger > 0.3)
                 robot.Intake.setPower(0.8);
-        else if (gamepad1.left_bumper)
+        else if (gamepad1.left_trigger > 0.3)
                 robot.Intake.setPower(-0.8);
         else
             robot.Intake.setPower(0.0);
@@ -128,15 +139,17 @@ public class StartDrive extends OpMode{
         else if (gamepad1.left_bumper)
             robot.Drop.setPosition(0);
 */
-        if (gamepad1.a)
+        if (gamepad2.x)
             robot.Drop.setPosition(0);
-        else if (gamepad1.b)
+        else if (gamepad2.y)
             robot.Drop.setPosition(0.3);
 
         if (gamepad2.a)
-            robot.Intakeservo.setPosition (-0.5);
+            robot.Intakeservo.setPosition (0.6);
         else if (gamepad2.b)
-            robot.Intakeservo.setPosition (0.4);
+            robot.Intakeservo.setPosition (0.75);
+        else if (gamepad2.left_bumper)
+            robot.Intakeservo.setPosition(0.3);
     /*
         if(gamepad2.right_bumper)
             robot.Stick.setPosition(0);
@@ -144,10 +157,13 @@ public class StartDrive extends OpMode{
             robot.Stick.setPosition (0.2);
 */
 
-        if (gamepad2.dpad_up)
+        if (-gamepad2.right_stick_y > 0.3)
             Hardware69.StickPos = 0.5;
-        else if (gamepad2.dpad_down)
+
+        else if (-gamepad2.right_stick_y < -0.3)
             Hardware69.StickPos = 0.7;
+        else if (gamepad2.right_bumper)
+            Hardware69.StickPos = 0;
         else if (-gamepad2.left_stick_y > 0.2)
             Hardware69. StickPos = Hardware69.StickPos - 0.00125;
         else if (-gamepad2.left_stick_y < -0.2)
