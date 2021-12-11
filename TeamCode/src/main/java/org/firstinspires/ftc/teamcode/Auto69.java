@@ -64,7 +64,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auton 69: lower path", group="Pushbot")
+@Autonomous(name="Auton 69: red path", group="Pushbot")
 
 public class Auto69 extends LinearOpMode {
 
