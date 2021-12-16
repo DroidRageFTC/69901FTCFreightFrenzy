@@ -64,7 +64,7 @@ public class StartDrive extends OpMode{
     {
         double leftPower;
         double rightPower;
-        double ArmPower = 0.5;
+       // double ArmPower = 0.5;
 
         // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
         //left = -gamepad1.left_stick_y;
@@ -88,7 +88,7 @@ public class StartDrive extends OpMode{
 
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
-     ArmPower = Range.clip(Lift, -0.2, 0.2) ;
+     //ArmPower = Range.clip(Lift, -0.2, 0.2) ;
         robot.leftDrive.setPower(leftPower * speedMultiplier);
         robot.backleftDrive.setPower(leftPower * speedMultiplier);
         robot.backrightDrive.setPower(rightPower * speedMultiplier);
@@ -102,19 +102,35 @@ public class StartDrive extends OpMode{
         else if (gamepad2.right_trigger < 0.1 && gamepad2.left_trigger < 0.1)
             robot.Carousel.setPower(0.0);
 
-        // Use gamepad buttons to move the arm by the left stick
-        if (gamepad2.dpad_up) {
-            // high
-            robot.setArmPosition(0.23);
-            robot.Arm.setPower(0.6);
-            robot.Intakeservo.setPosition(0.6);
-
-        } else if (gamepad2.dpad_down) {
-            robot.setArmPosition(0);
-            robot.Arm.setPower(0);
-            robot.Intakeservo.setPosition (0.75);
-
+        // Arm Servo Rotation
+        if (gamepad1.dpad_up) {
+            robot.Arm.setPosition(0.0);
         }
+        else if (gamepad1.dpad_left) {
+            robot.Arm.setPosition(0.33);
+        }
+        else if (gamepad1.dpad_right) {
+            robot.Arm.setPosition(0.66);
+        }
+        // Arm Intake p
+
+
+
+
+
+        // Use gamepad buttons to move the arm by the left stick
+//        if (gamepad2.dpad_up) {
+//            // high
+//            robot.setArmPosition(0.23);
+//            robot.Arm.setPower(0.6);
+//            robot.IntakeServo.setPosition(0.6);
+//
+//        } else if (gamepad2.dpad_down) {
+//            robot.setArmPosition(0);
+//            robot.Arm.setPower(0);
+//            robot.IntakeServo.setPosition (0.75);
+//
+//        }
 
 
 //        if (gamepad2.left_stick_y > 0.4)
@@ -139,37 +155,37 @@ public class StartDrive extends OpMode{
         else if (gamepad1.left_bumper)
             robot.Drop.setPosition(0);
 */
-        if (gamepad2.x)
-            robot.Drop.setPosition(0);
-        else if (gamepad2.y)
-            robot.Drop.setPosition(0.3);
-
-        if (gamepad2.a)
-            robot.Intakeservo.setPosition (0.6);
-        else if (gamepad2.b)
-            robot.Intakeservo.setPosition (0.75);
-        else if (gamepad2.left_bumper)
-            robot.Intakeservo.setPosition(0.3);
+//        if (gamepad2.x)
+//            robot.Drop.setPosition(0);
+//        else if (gamepad2.y)
+//            robot.Drop.setPosition(0.3);
+//
+//        if (gamepad2.a)
+//            robot.IntakeMotor.setPosition (0.6);
+//        else if (gamepad2.b)
+//            robot.IntakeMotor.setPosition (0.75);
+//        else if (gamepad2.left_bumper)
+//            robot.IntakeMotor.setPosition(0.3);
     /*
         if(gamepad2.right_bumper)
             robot.Stick.setPosition(0);
         else if (gamepad2.left_bumper)
             robot.Stick.setPosition (0.2);
 */
-
-        if (-gamepad2.right_stick_y > 0.3)
-            Hardware69.StickPos = 0.5;
-
-        else if (-gamepad2.right_stick_y < -0.3)
-            Hardware69.StickPos = 0.7;
-        else if (gamepad2.right_bumper)
-            Hardware69.StickPos = 0;
-        else if (-gamepad2.left_stick_y > 0.2)
-            Hardware69. StickPos = Hardware69.StickPos - 0.00125;
-        else if (-gamepad2.left_stick_y < -0.2)
-            Hardware69. StickPos = Hardware69.StickPos + 0.00125;
-
-        robot.Stick.setPosition(Hardware69.StickPos);
+// Stick postions (Leaving commented until actually used)
+//        if (-gamepad2.right_stick_y > 0.3)
+//            Hardware69.StickPos = 0.5;
+//
+//        else if (-gamepad2.right_stick_y < -0.3)
+//            Hardware69.StickPos = 0.7;
+//        else if (gamepad2.right_bumper)
+//            Hardware69.StickPos = 0;
+//        else if (-gamepad2.left_stick_y > 0.2)
+//            Hardware69. StickPos = Hardware69.StickPos - 0.00125;
+//        else if (-gamepad2.left_stick_y < -0.2)
+//            Hardware69. StickPos = Hardware69.StickPos + 0.00125;
+//
+//        robot.Stick.setPosition(Hardware69.StickPos);
 
 
 
