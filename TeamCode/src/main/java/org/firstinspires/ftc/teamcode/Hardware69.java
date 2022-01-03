@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -27,16 +26,25 @@ public class Hardware69 {
      */
 
     /* Public OpMode members. */
-    public DcMotor leftDrive = null;
-    public DcMotor rightDrive = null;
+    public DcMotor leftFront = null;
+    public DcMotor rightFront = null;
+    public Servo Turret = null;
     public Servo Arm = null;
-    public DcMotor backleftDrive = null;
-    public DcMotor backrightDrive = null;
+    public Servo Pivot = null;
+    public Servo Gripper = null;
+    public DcMotor leftRear = null;
+    public DcMotor rightRear = null;
     public DcMotor Carousel = null;
     public DcMotor Intake = null;
-    public Servo IntakeServo = null;
-    public Servo Drop = null;
-    public Servo Stick = null;
+
+    double targetTime;
+    double targetTime2;
+    boolean left;
+    boolean right;
+
+//    public Servo IntakeServo = null;
+//    public Servo Drop = null;
+//    public Servo Stick = null;
 
     public static final double MID_SERVO = 0.9;
     public static final double ARM_UP_POWER = 0.45;
@@ -49,7 +57,7 @@ public class Hardware69 {
 
     /* local OpMode members. */
     HardwareMap hwMap = null;
-    private ElapsedTime period = new ElapsedTime();
+    public ElapsedTime runtime = new ElapsedTime();
 
     /* Constructor */
     public Hardware69() {
@@ -62,29 +70,32 @@ public class Hardware69 {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftDrive = hwMap.get(DcMotor.class, "left_drive");
-        rightDrive = hwMap.get(DcMotor.class, "right_drive");
-        backleftDrive = hwMap.get(DcMotor.class, "BL_drive");
-        backrightDrive = hwMap.get(DcMotor.class, "BR_drive");
-        //Arm = hwMap.get(DcMotorEx.class, "Arm");
-        Carousel = hwMap.get(DcMotor.class, "Rotate");
+        leftFront = hwMap.get(DcMotor.class, "leftFront");
+        rightFront = hwMap.get(DcMotor.class, "rightFront");
+        leftRear = hwMap.get(DcMotor.class, "leftRear");
+        rightRear = hwMap.get(DcMotor.class, "rightRear");
+        Arm = hwMap.get(Servo.class, "Arm");
+        Turret = hwMap.get(Servo.class, "Turret");
+        Pivot = hwMap.get(Servo.class, "Pivot");
+        Gripper = hwMap.get(Servo.class, "Gripper");
+        Carousel = hwMap.get(DcMotor.class, "Carousel");
         Intake   = hwMap.get(DcMotor.class,"Intake");
-        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
-        Drop = hwMap.get(Servo.class,"Drop");
-        Stick = hwMap.get(Servo.class,"Stick");
+//        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
+//        Drop = hwMap.get(Servo.class,"Drop");
+//        Stick = hwMap.get(Servo.class,"Stick");
 
-        leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        backleftDrive.setDirection(DcMotor.Direction.FORWARD);
-        backrightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftFront.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        rightFront.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        leftRear.setDirection(DcMotor.Direction.FORWARD);
+        rightRear.setDirection(DcMotor.Direction.REVERSE);
         Carousel.setDirection(DcMotor.Direction.FORWARD);
         Intake.setDirection(DcMotor.Direction.FORWARD);
-        //Arm.setDirection(DcMotorEx.Direction.REVERSE);
+        Arm.setDirection(Servo.Direction.REVERSE);
         // Set all motors to zero power
-        leftDrive.setPower(0);
-        backleftDrive.setPower(0);
-        rightDrive.setPower(0);
-        backrightDrive.setPower(0);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
         Carousel.setPower(0);
         Intake.setPower(0);
         // Set all motors to run without encoders.

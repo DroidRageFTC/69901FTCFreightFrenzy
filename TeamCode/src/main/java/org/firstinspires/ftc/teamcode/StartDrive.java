@@ -89,10 +89,10 @@ public class StartDrive extends OpMode{
         leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
         rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
      //ArmPower = Range.clip(Lift, -0.2, 0.2) ;
-        robot.leftDrive.setPower(leftPower * speedMultiplier);
-        robot.backleftDrive.setPower(leftPower * speedMultiplier);
-        robot.backrightDrive.setPower(rightPower * speedMultiplier);
-        robot.rightDrive.setPower(rightPower * speedMultiplier);
+        robot.leftFront.setPower(leftPower * speedMultiplier);
+        robot.leftRear.setPower(leftPower * speedMultiplier);
+        robot.rightRear.setPower(rightPower * speedMultiplier);
+        robot.rightFront.setPower(rightPower * speedMultiplier);
 
         //Carsouel moves based on left or right trigger
         if (gamepad2.right_trigger >= 0.1)
@@ -104,15 +104,39 @@ public class StartDrive extends OpMode{
 
         // Arm Servo Rotation
         if (gamepad1.dpad_up) {
-            robot.Arm.setPosition(0.0);
+            robot.Arm.setPosition(0.31);
+            robot.Pivot.setPosition(0.041);
+            robot.Turret.setPosition(0.56);
         }
         else if (gamepad1.dpad_left) {
-            robot.Arm.setPosition(0.33);
+            robot.Arm.setPosition(0.31);
+            robot.targetTime = 5 + robot.runtime.seconds();
+            robot.left = true;
         }
+        if (robot.runtime.seconds() >= robot.targetTime && robot.left) {
+            robot.Pivot.setPosition(0.041);
+            robot.Turret.setPosition(0.22);
+            robot.left = false;
+        }
+
         else if (gamepad1.dpad_right) {
-            robot.Arm.setPosition(0.66);
+            robot.Arm.setPosition(0.31);
+            robot.targetTime = 5 + robot.runtime.seconds();
+            robot.right = true;
         }
-        // Arm Intake p
+        if (robot.runtime.seconds() >= robot.targetTime && robot.right){
+            robot.Pivot.setPosition(0.041);
+            robot.Turret.setPosition(0.88);
+            robot.right = true;
+        }
+        // Gripper Servo
+
+        if (gamepad1.right_bumper){
+            robot.Gripper.setPosition(0.0);
+        }
+        else if (gamepad1.left_bumper){
+            robot.Gripper.setPosition(0.0);
+        }
 
 
 
