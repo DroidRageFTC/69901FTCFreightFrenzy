@@ -4,6 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.SubSystems.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.SubSystems.BoxSubsystem;
+import org.firstinspires.ftc.teamcode.SubSystems.FlipperSubsystem;
+import org.firstinspires.ftc.teamcode.SubSystems.TurretSubsystem;
+
 /**
      * This file provides basic Telop driving for a Pushbot robot.
      * The code is structured as an Iterative OpMode
@@ -25,6 +30,12 @@ public class StartDrive extends OpMode{
 
     /* Declare OpMode members. */
     Hardware69 robot       = new Hardware69(); // use the class created to define a Pushbot's hardware
+
+    ArmSubsystem arm                            = new ArmSubsystem                          ();
+    BoxSubsystem box                            = new BoxSubsystem                          ();
+    TurretSubsystem turret                      = new TurretSubsystem                       ();
+    FlipperSubsystem flipper                    = new FlipperSubsystem                      ();
+
     double          clawOffset  = 0.0 ;                  // Servo mid position
     final double    CLAW_SPEED  = 0.5 ;                 // sets rate to move servo
     double          ServoSpeed = 0.7;       //Speed of a servo
@@ -37,6 +48,11 @@ public class StartDrive extends OpMode{
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
+
+        arm.init(hardwareMap, telemetry, box, turret, flipper);
+        box.init(hardwareMap, telemetry);
+        turret.init(hardwareMap, telemetry);
+        flipper.init(hardwareMap,telemetry);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Sup Nerd", "Hello Driver");    //
@@ -62,6 +78,10 @@ public class StartDrive extends OpMode{
     @Override
     public void loop() 
     {
+        // DO all thecrap with all the arm and stuff
+        arm.findArmPosition(gamepad1, gamepad2);
+        arm.loopCommand();
+
         double leftPower;
         double rightPower;
        // double ArmPower = 0.5;
@@ -95,48 +115,48 @@ public class StartDrive extends OpMode{
         robot.rightFront.setPower(rightPower * speedMultiplier);
 
         //Carsouel moves based on left or right trigger
-        if (gamepad2.right_trigger >= 0.1)
-                robot.Carousel.setPower(0.4);
-        if (gamepad2.left_trigger >= 0.1)
-            robot.Carousel.setPower(-0.4);
-        else if (gamepad2.right_trigger < 0.1 && gamepad2.left_trigger < 0.1)
-            robot.Carousel.setPower(0.0);
+//        if (gamepad2.right_trigger >= 0.1)
+//                robot.Carousel.setPower(0.4);
+//        if (gamepad2.left_trigger >= 0.1)
+//            robot.Carousel.setPower(-0.4);
+//        else if (gamepad2.right_trigger < 0.1 && gamepad2.left_trigger < 0.1)
+//            robot.Carousel.setPower(0.0);
 
-        // Arm Servo Rotation
-        if (gamepad1.dpad_up) {
-            robot.Arm.setPosition(0.31);
-            robot.Pivot.setPosition(0.041);
-            robot.Turret.setPosition(0.56);
-        }
-        else if (gamepad1.dpad_left) {
-            robot.Arm.setPosition(0.31);
-            robot.targetTime = 5 + robot.runtime.seconds();
-            robot.left = true;
-        }
-        if (robot.runtime.seconds() >= robot.targetTime && robot.left) {
-            robot.Pivot.setPosition(0.041);
-            robot.Turret.setPosition(0.22);
-            robot.left = false;
-        }
-
-        else if (gamepad1.dpad_right) {
-            robot.Arm.setPosition(0.31);
-            robot.targetTime = 5 + robot.runtime.seconds();
-            robot.right = true;
-        }
-        if (robot.runtime.seconds() >= robot.targetTime && robot.right){
-            robot.Pivot.setPosition(0.041);
-            robot.Turret.setPosition(0.88);
-            robot.right = true;
-        }
+//        // Arm Servo Rotation
+//        if (gamepad1.dpad_up) {
+//            robot.Arm.setTargetPosition(0);
+//            robot.Pivot.setPosition(0.041);
+//            robot.Turret.setTargetPosition(0);
+//        }
+//        else if (gamepad1.dpad_left) {
+//            robot.Arm.setTargetPosition(0);
+//            robot.targetTime = 5 + robot.runtime.seconds();
+//            robot.left = true;
+//        }
+//        if (robot.runtime.seconds() >= robot.targetTime && robot.left) {
+//            robot.Pivot.setPosition(0.041);
+//            robot.Turret.setTargetPosition(0);
+//            robot.left = false;
+//        }
+//
+//        else if (gamepad1.dpad_right) {
+//            robot.Arm.setTargetPosition(0);
+//            robot.targetTime = 5 + robot.runtime.seconds();
+//            robot.right = true;
+//        }
+//        if (robot.runtime.seconds() >= robot.targetTime && robot.right){
+//            robot.Pivot.setPosition(0.041);
+//            robot.Turret.setTargetPosition(0);
+//            robot.right = true;
+//        }
         // Gripper Servo
 
-        if (gamepad1.right_bumper){
-            robot.Gripper.setPosition(0.0);
-        }
-        else if (gamepad1.left_bumper){
-            robot.Gripper.setPosition(0.0);
-        }
+//        if (gamepad1.right_bumper){
+//            robot.Gripper.setPosition(0.0);
+//        }
+//        else if (gamepad1.left_bumper){
+//            robot.Gripper.setPosition(0.0);
+//        }
 
 
 
@@ -165,12 +185,12 @@ public class StartDrive extends OpMode{
 //            robot.Arm.setPower(0.0);
 
         //takes the drop or lifts it based on right bumper (up) and left bumper (down)
-        if (gamepad1.right_trigger > 0.3)
-                robot.Intake.setPower(0.8);
-        else if (gamepad1.left_trigger > 0.3)
-                robot.Intake.setPower(-0.8);
-        else
-            robot.Intake.setPower(0.0);
+//        if (gamepad1.right_trigger > 0.3)
+//                robot.Intake.setPower(0.8);
+//        else if (gamepad1.left_trigger > 0.3)
+//                robot.Intake.setPower(-0.8);
+//        else
+//            robot.Intake.setPower(0.0);
         // Intake servo Controls
 
 

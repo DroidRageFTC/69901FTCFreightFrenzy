@@ -28,14 +28,14 @@ public class Hardware69 {
     /* Public OpMode members. */
     public DcMotor leftFront = null;
     public DcMotor rightFront = null;
-    public Servo Turret = null;
-    public Servo Arm = null;
-    public Servo Pivot = null;
-    public Servo Gripper = null;
+//    public DcMotor Turret = null;
+//    public DcMotor Arm = null;
+//    public Servo Pivot = null;
+//    public Servo Gripper = null;
     public DcMotor leftRear = null;
     public DcMotor rightRear = null;
-    public DcMotor Carousel = null;
-    public DcMotor Intake = null;
+//    public DcMotor Carousel = null;
+//    public DcMotor Intake = null;
 
     double targetTime;
     double targetTime2;
@@ -74,12 +74,12 @@ public class Hardware69 {
         rightFront = hwMap.get(DcMotor.class, "rightFront");
         leftRear = hwMap.get(DcMotor.class, "leftRear");
         rightRear = hwMap.get(DcMotor.class, "rightRear");
-        Arm = hwMap.get(Servo.class, "Arm");
-        Turret = hwMap.get(Servo.class, "Turret");
-        Pivot = hwMap.get(Servo.class, "Pivot");
-        Gripper = hwMap.get(Servo.class, "Gripper");
-        Carousel = hwMap.get(DcMotor.class, "Carousel");
-        Intake   = hwMap.get(DcMotor.class,"Intake");
+//        Arm = hwMap.get(DcMotor.class, "Arm");
+//        Turret = hwMap.get(DcMotor.class, "Turret");
+//        Pivot = hwMap.get(Servo.class, "Pivot");
+//        Gripper = hwMap.get(Servo.class, "Gripper");
+//        Carousel = hwMap.get(DcMotor.class, "Carousel");
+//        Intake   = hwMap.get(DcMotor.class,"Intake");
 //        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
 //        Drop = hwMap.get(Servo.class,"Drop");
 //        Stick = hwMap.get(Servo.class,"Stick");
@@ -88,16 +88,19 @@ public class Hardware69 {
         rightFront.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         leftRear.setDirection(DcMotor.Direction.FORWARD);
         rightRear.setDirection(DcMotor.Direction.REVERSE);
-        Carousel.setDirection(DcMotor.Direction.FORWARD);
-        Intake.setDirection(DcMotor.Direction.FORWARD);
-        Arm.setDirection(Servo.Direction.REVERSE);
+//        Carousel.setDirection(DcMotor.Direction.FORWARD);
+//        Intake.setDirection(DcMotor.Direction.FORWARD);
+//        Arm.setDirection(DcMotor.Direction.REVERSE);
         // Set all motors to zero power
         leftFront.setPower(0);
         leftRear.setPower(0);
         rightFront.setPower(0);
         rightRear.setPower(0);
-        Carousel.setPower(0);
-        Intake.setPower(0);
+//        Carousel.setPower(0);
+//        Intake.setPower(0);
+//
+//        Turret.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
 
