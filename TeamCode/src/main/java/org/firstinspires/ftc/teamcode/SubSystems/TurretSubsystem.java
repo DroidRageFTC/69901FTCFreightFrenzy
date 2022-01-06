@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -38,6 +39,9 @@ public class TurretSubsystem extends BaseSubsystem {
         super.init(hardwareMap, telemetry);
         turretMotor = hardwareMap.get(DcMotorEx.class,"turretMotor");
         turretMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        turretMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        turretMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        turretMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         setTurretPosition();
     }
@@ -70,7 +74,8 @@ public class TurretSubsystem extends BaseSubsystem {
     }
     public void setTurretPosition() {
         turretMotor.setPower(TURRET_POWER);
-        turretMotor.setTargetPosition((0));
+        turretMotor.setTargetPosition(((int) (targetPos * TURRET_TICK_PER_REVOLUTION)));
+        turretMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         //turretServo2.setPosition(targetPos);
     }
 }

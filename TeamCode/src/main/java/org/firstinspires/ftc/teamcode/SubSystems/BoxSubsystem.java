@@ -40,7 +40,7 @@ public class BoxSubsystem extends BaseSubsystem {
     public void init(HardwareMap hardwareMap, Telemetry telemetry) {
         super.init(hardwareMap, telemetry);
         boxServo = hardwareMap.get(Servo.class,"boxServo");
-        boxServo.setDirection(Servo.Direction.REVERSE);
+        boxServo.setDirection(Servo.Direction.FORWARD);
 
         boxServo.setPosition(BOX_DOWN_SLIGHTLY_FORWARD);
     }
