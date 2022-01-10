@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -28,16 +27,26 @@ public class Hardware69 {
      */
 
     /* Public OpMode members. */
-    public DcMotor leftDrive = null;
-    public DcMotor rightDrive = null;
-    public DcMotorEx Arm = null;
-    public DcMotor backleftDrive = null;
-    public DcMotor backrightDrive = null;
-    public DcMotor Carousel = null;
+    public DcMotor leftFront = null;
+    public DcMotor rightFront = null;
+//    public DcMotor Turret = null;
+//    public DcMotor Arm = null;
+//    public Servo Pivot = null;
+//    public Servo Gripper = null;
+    public DcMotor leftRear = null;
+    public DcMotor rightRear = null;
+//    public DcMotor Carousel = null;
     public DcMotor Intake = null;
-    public Servo Intakeservo = null;
-    public Servo Drop = null;
-    public Servo Stick = null;
+    public CRServo carousel = null;
+
+    double targetTime;
+    double targetTime2;
+    boolean left;
+    boolean right;
+
+//    public Servo IntakeServo = null;
+//    public Servo Drop = null;
+//    public Servo Stick = null;
 
     public static final double MID_SERVO = 0.9;
     public static final double ARM_UP_POWER = 0.45;
@@ -45,12 +54,12 @@ public class Hardware69 {
     public static double StickPos = 0;
 
     public void setArmPosition(double pos) {
-        Arm.setTargetPosition((int) (1425.06 * pos));
+       // Arm.setTargetPosition((int) (1425.06 * pos));
     }
 
     /* local OpMode members. */
     HardwareMap hwMap = null;
-    private ElapsedTime period = new ElapsedTime();
+    public ElapsedTime runtime = new ElapsedTime();
 
     /* Constructor */
     public Hardware69() {
@@ -63,36 +72,48 @@ public class Hardware69 {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftDrive = hwMap.get(DcMotor.class, "left_drive");
-        rightDrive = hwMap.get(DcMotor.class, "right_drive");
-        backleftDrive = hwMap.get(DcMotor.class, "BL_drive");
-        backrightDrive = hwMap.get(DcMotor.class, "BR_drive");
-        Arm = hwMap.get(DcMotorEx.class, "Arm");
-        Carousel = hwMap.get(DcMotor.class, "Rotate");
+        leftFront = hwMap.get(DcMotor.class, "leftFront");
+        rightFront = hwMap.get(DcMotor.class, "rightFront");
+        leftRear = hwMap.get(DcMotor.class, "leftRear");
+        rightRear = hwMap.get(DcMotor.class, "rightRear");
+//        Arm = hwMap.get(DcMotor.class, "Arm");
+//        Turret = hwMap.get(DcMotor.class, "Turret");
+//        Pivot = hwMap.get(Servo.class, "Pivot");
+//        Gripper = hwMap.get(Servo.class, "Gripper");
+//        Carousel = hwMap.get(DcMotor.class, "Carousel");
         Intake   = hwMap.get(DcMotor.class,"Intake");
-        Intakeservo = hwMap.get(Servo.class,"Intakeservo");
-        Drop = hwMap.get(Servo.class,"Drop");
-        Stick = hwMap.get(Servo.class,"Stick");
+        carousel = hwMap.get(CRServo.class, "carousel");
+//        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
+//        Drop = hwMap.get(Servo.class,"Drop");
+//        Stick = hwMap.get(Servo.class,"Stick");
 
-        leftDrive.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        backleftDrive.setDirection(DcMotor.Direction.FORWARD);
-        backrightDrive.setDirection(DcMotor.Direction.REVERSE);
-        Carousel.setDirection(DcMotor.Direction.FORWARD);
-        Intake.setDirection(DcMotor.Direction.FORWARD);
-        Arm.setDirection(DcMotorEx.Direction.REVERSE);
+        leftFront.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+        rightFront.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        leftRear.setDirection(DcMotor.Direction.FORWARD);
+        rightRear.setDirection(DcMotor.Direction.REVERSE);
+        carousel.setDirection(DcMotor.Direction.FORWARD);
+
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        Intake.setDirection(DcMotor.Direction.FORWARD);
+//        Arm.setDirection(DcMotor.Direction.REVERSE);
         // Set all motors to zero power
-        leftDrive.setPower(0);
-        backleftDrive.setPower(0);
-        rightDrive.setPower(0);
-        backrightDrive.setPower(0);
-        Carousel.setPower(0);
-        Intake.setPower(0);
+        leftFront.setPower(0);
+        leftRear.setPower(0);
+        rightFront.setPower(0);
+        rightRear.setPower(0);
+//        Carousel.setPower(0);
+//        Intake.setPower(0);
+//
+//        Turret.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
 
-        Arm.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        Arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        Arm.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//        Arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
@@ -108,9 +129,10 @@ public class Hardware69 {
             leftClaw.setPosition(MID_SERVO);
             rightClaw.setPosition(MID_SERVO);
             */
-        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+       /* Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Arm.setTargetPosition(0);
         Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        */
     }
 }
 
