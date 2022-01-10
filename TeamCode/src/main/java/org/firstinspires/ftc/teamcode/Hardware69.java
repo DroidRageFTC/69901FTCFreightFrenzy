@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -35,7 +36,8 @@ public class Hardware69 {
     public DcMotor leftRear = null;
     public DcMotor rightRear = null;
 //    public DcMotor Carousel = null;
-//    public DcMotor Intake = null;
+    public DcMotor Intake = null;
+    public CRServo carousel = null;
 
     double targetTime;
     double targetTime2;
@@ -79,7 +81,8 @@ public class Hardware69 {
 //        Pivot = hwMap.get(Servo.class, "Pivot");
 //        Gripper = hwMap.get(Servo.class, "Gripper");
 //        Carousel = hwMap.get(DcMotor.class, "Carousel");
-//        Intake   = hwMap.get(DcMotor.class,"Intake");
+        Intake   = hwMap.get(DcMotor.class,"Intake");
+        carousel = hwMap.get(CRServo.class, "carousel");
 //        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
 //        Drop = hwMap.get(Servo.class,"Drop");
 //        Stick = hwMap.get(Servo.class,"Stick");
@@ -88,7 +91,7 @@ public class Hardware69 {
         rightFront.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         leftRear.setDirection(DcMotor.Direction.FORWARD);
         rightRear.setDirection(DcMotor.Direction.REVERSE);
-//        Carousel.setDirection(DcMotor.Direction.FORWARD);
+        carousel.setDirection(DcMotor.Direction.FORWARD);
 //        Intake.setDirection(DcMotor.Direction.FORWARD);
 //        Arm.setDirection(DcMotor.Direction.REVERSE);
         // Set all motors to zero power

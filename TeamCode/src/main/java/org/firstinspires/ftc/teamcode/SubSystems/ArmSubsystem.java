@@ -22,6 +22,7 @@ public class ArmSubsystem extends BaseSubsystem {
     public static double ARM_INTERMEDIATE_POS = -0.22; //0.36 //0.27
 
     public static double ARM_POWER = 0.35;
+    int x = 5;
 //    public static double ARM_SLOW_POWER = 0.3;
     public static double ARM_TICKS_PER_REV = 1425.06;
     public static double ARM_POS_CHANGE_SPEED = 0.0005;
@@ -157,8 +158,8 @@ public class ArmSubsystem extends BaseSubsystem {
         gamepad2StickTouchingEdge = (Math.sqrt((Math.pow(-gamepad2.right_stick_y, 2)) + (Math.pow(gamepad2.right_stick_x, 2)))) > ControllerSubsystem.TURRET_JOYSTICK_THRESHOLD;
 
         // we basically calculate the stick position
-        gamepad2StickPos = Math.toDegrees(Math.atan2(gamepad2.right_stick_x, -gamepad2.right_stick_y)) + (TurretSubsystem.TURRET_RANGE / 2);
-        gamepad2StickMath1 = gamepad2StickPos - ((0.5 * TurretSubsystem.TURRET_RANGE) - (TurretSubsystem.TURRET_SERVOS_FRONT * TurretSubsystem.TURRET_RANGE));
+        gamepad2StickPos = Math.toDegrees(Math.atan2(gamepad2.right_stick_x, -gamepad2.right_stick_y)) /*+ (TurretSubsystem.TURRET_RANGE / 2)*/;
+        gamepad2StickMath1 = gamepad2StickPos /*- ((0.5 * TurretSubsystem.TURRET_RANGE) - (TurretSubsystem.TURRET_SERVOS_FRONT * TurretSubsystem.TURRET_RANGE))*/;
         gamepad2StickMath2 = ((gamepad2StickPos) / (TurretSubsystem.TURRET_RANGE));
 
         if (gamepad2StickTouchingEdge) {

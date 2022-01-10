@@ -10,8 +10,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @Config
 public class FlipperSubsystem extends BaseSubsystem {
     // Values
-    public static double FLIPPER_OPEN = 0.270;
-    public static double FLIPPER_CLOSED = 0.607;
+    public static double FLIPPER_OPEN = 0.87;
+    public static double FLIPPER_CLOSED = 1;
 //    public static double FLIPPER_UP = 0.0;
 
 //    boolean disableFlipper = true;
@@ -34,9 +34,9 @@ public class FlipperSubsystem extends BaseSubsystem {
 
     public void defaultCommand(Gamepad gamepad1, Gamepad gamepad2) {
         super.gamepadInit(gamepad1, gamepad2);
-        if (gamepad2.right_bumper/* && !disableFlipper*/) {
+        if (gamepad2.right_bumper) {
             flipperServo.setPosition(FLIPPER_OPEN);
-        } else/* if (!disableFlipper) */ {
+        } else {
             flipperServo.setPosition(FLIPPER_CLOSED);
         }
     }
