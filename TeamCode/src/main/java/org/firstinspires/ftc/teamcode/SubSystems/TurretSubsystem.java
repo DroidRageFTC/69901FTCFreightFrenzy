@@ -19,7 +19,7 @@ public class TurretSubsystem extends BaseSubsystem {
 
     public static double TURRET_SERVOS_RIGHT = 0.25;
 
-    public static double TURRET_POWER = 0.3;
+    public static double TURRET_POWER = 0.8;
 
     public static double TURRET_RANGE = 360;
     public static double TURRET_P = 20;

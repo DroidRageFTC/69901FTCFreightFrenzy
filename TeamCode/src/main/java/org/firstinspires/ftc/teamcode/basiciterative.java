@@ -94,7 +94,7 @@ public class basiciterative extends OpMode
 
         // Tell the driver that initialization is complete.
 
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Status", hi);
 
     }
 

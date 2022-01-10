@@ -45,7 +45,6 @@ public class ArmSubsystem extends BaseSubsystem {
     boolean armForward = false;
     boolean armReset = false;
     boolean armReset2 = false;
-    boolean armDown = false;
     boolean boxUp = false;
     boolean boxDown = false;
     boolean armIsUp = false;
