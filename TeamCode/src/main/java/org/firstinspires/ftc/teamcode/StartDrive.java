@@ -46,6 +46,7 @@ public class StartDrive extends OpMode{
     public void init() {
         /* Initialize the hardware variables.
          * The init() method of the hardware class does all the work here
+         * Init's all the subsystems
          */
         robot.init(hardwareMap);
 
@@ -94,7 +95,8 @@ public class StartDrive extends OpMode{
         double drive =- gamepad1.left_stick_y;
         double turn  =  gamepad1.right_stick_x;
         double speedMultiplier;
-
+        //Controls the speed of the bot
+        //if the left bumper= fast, right bump= slow, if not keep it at normal
         if (gamepad1.left_bumper) {
             speedMultiplier = 1;
         } else if (gamepad1.right_bumper) {
@@ -115,6 +117,7 @@ public class StartDrive extends OpMode{
         robot.rightRear.setPower(rightPower * speedMultiplier);
         robot.rightFront.setPower(rightPower * speedMultiplier);
 
+        //right and left trigger control the intake
         if (gamepad1.right_trigger >= 0.1)
                 robot.Intake.setPower(1);
         if (gamepad1.left_trigger >= 0.1)
@@ -122,6 +125,8 @@ public class StartDrive extends OpMode{
         else if (gamepad1.right_trigger < 0.1 && gamepad1.left_trigger < 0.1)
             robot.Intake.setPower(0);
 
+
+        //buttons control the carousel
         if (gamepad2.b) {
             robot.carousel.setPower(1);
         }

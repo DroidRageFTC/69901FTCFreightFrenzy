@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
 public class ArmSubsystem extends BaseSubsystem {
-    // Values
+    // Values of the arm positions and power
     public static double ARM_INTAKE_POS = -0.03; // 0.04 //-0.09
 //    public static double ARM_NEUTRAL_POS = -0.003;
     public static double ARM_LOW_POS = -.442; //0.132 //0.035
@@ -79,6 +79,7 @@ public class ArmSubsystem extends BaseSubsystem {
         this.turret = turret;
         this.flipper = flipper;
 
+        // gives the name to the arm, and setDirection
         armMotor = hardwareMap.get(DcMotorEx.class,"armMotor");
         armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -131,6 +132,7 @@ public class ArmSubsystem extends BaseSubsystem {
 //            armTargetPos = ARM_INTAKE_POS;
 //            setIntakePos = false;
 //        }
+        //combines the directions of the arm with the other subsystems
         if (gamepad2.dpad_up) {
             armUp(ARM_HIGH_POS, BoxSubsystem.BOX_HIGH, TurretSubsystem.TURRET_SERVOS_FRONT, false);
         } else if (gamepad2.dpad_right) {
