@@ -31,14 +31,13 @@ public class StartDrive extends OpMode{
     /* Declare OpMode members. */
     Hardware69 robot       = new Hardware69(); // use the class created to define a Pushbot's hardware
 
+    //defines the subsystems in this tele-op
     ArmSubsystem arm                            = new ArmSubsystem                          ();
     BoxSubsystem box                            = new BoxSubsystem                          ();
     TurretSubsystem turret                      = new TurretSubsystem                       ();
     FlipperSubsystem flipper                    = new FlipperSubsystem                      ();
 
     double          clawOffset  = 0.0 ;                  // Servo mid position
-    final double    CLAW_SPEED  = 0.5 ;                 // sets rate to move servo
-    double          ServoSpeed = 0.7;       //Speed of a servo
     /*
      * Code to run ONCE when the driver hits INIT
      */

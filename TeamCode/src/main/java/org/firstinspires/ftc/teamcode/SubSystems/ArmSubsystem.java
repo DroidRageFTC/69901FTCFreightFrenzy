@@ -197,16 +197,9 @@ public class ArmSubsystem extends BaseSubsystem {
             armIsUp = true;
 
             setArmPosition();
-//            turret.setTurretPosition();
-//            turret.disableTurret = false;
+
             armIsMoving = false;
         }
-
-
-
-
-
-
         if (boxDown && runtime.seconds() >= targetTime1) {
             boxDown = false;
 
@@ -250,20 +243,14 @@ public class ArmSubsystem extends BaseSubsystem {
                 }
 
                 turret.disableTurret = true;
-
                 armTargetPos = ARM_INTERMEDIATE_POS;
                 setArmPosition();
-
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-//            flipper.disableFlipper = false;
 
                 // action 1
                 boxUp = true;
-
                 // action 2
                 targetTime1 = runtime.seconds() + ARM_UP_WAIT;
-
                 // action 3
                 if (moveTurretInstantly) {
                     targetTime2 = runtime.seconds() + ARM_UP_WAIT;
@@ -309,18 +296,5 @@ public class ArmSubsystem extends BaseSubsystem {
                 targetTime3 = runtime.seconds() + ARM_RESET_WAIT_2;
             }
         }
-    }
-
-
-    public double getArmPosition() {
-        return armMotor.getCurrentPosition()/ ARM_TICKS_PER_REV;
-
-    }
-
-    public void breakMode() {
-        armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-    }
-    public void floatMode() {
-        armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
     }
 }
