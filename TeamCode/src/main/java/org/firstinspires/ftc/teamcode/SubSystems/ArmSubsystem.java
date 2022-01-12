@@ -23,11 +23,10 @@ public class ArmSubsystem extends BaseSubsystem {
 
     public static double ARM_POWER = 0.35;
     int x = 5;
-//    public static double ARM_SLOW_POWER = 0.3;
     public static double ARM_TICKS_PER_REV = 1425.06;
     public static double ARM_POS_CHANGE_SPEED = 0.0005;
 
-//    public static double ARM_INTAKE_WAIT = 0.45;
+
     public static double ARM_UP_WAIT = 0.4;
     public static double ARM_FORWARD_WAIT = 0.7;
     public static double ARM_DOWN_WAIT = 0;
@@ -102,36 +101,7 @@ public class ArmSubsystem extends BaseSubsystem {
 
     public void findArmPosition(Gamepad gamepad1, Gamepad gamepad2) {
         super.gamepadInit(gamepad1, gamepad2);
-        // High
-//        if (gamepad2.dpad_up) {
-//            armMotor.setPower(ARM_POWER);
-//            armTargetPos = ARM_HIGH_POS;
-//            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        }
-//        // Mid
-//        if (gamepad2.dpad_right) {
-//            armMotor.setPower(ARM_POWER);
-//            armTargetPos = ARM_MID_POS;
-//            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        }
-//        // Shared hub
-//        if (gamepad2.dpad_down) {
-//            armMotor.setPower(ARM_POWER);
-//            armTargetPos = ARM_LOW_POS;
-//            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        }
-//
-//        // intake/reset position
-//        if (gamepad2.dpad_left) {
-//
-//            targetTime1 = runtime.seconds() + ARM_INTAKE_WAIT;
-//            setIntakePos = true;
-//        }
-//        if (setIntakePos && runtime.seconds() >= targetTime1) {
-//            armTargetPos = ARM_INTAKE_POS;
-//            setIntakePos = false;
-//        }
+
         //combines the directions of the arm with the other subsystems
         if (gamepad2.dpad_up) {
             armUp(ARM_HIGH_POS, BoxSubsystem.BOX_HIGH, TurretSubsystem.TURRET_SERVOS_FRONT, false);
@@ -166,19 +136,11 @@ public class ArmSubsystem extends BaseSubsystem {
         if (gamepad2StickTouchingEdge) {
             armUp(ARM_HIGH_POS, BoxSubsystem.BOX_HIGH, gamepad2StickMath2, false);
         }
-//        else if (gamepad2StickMath2 < -0.1 || gamepad2StickPos > 1.1) {
-//            armReset();
-//        }
-
-//        if (!gamepad2.dpad_up && !gamepad2.dpad_left && !gamepad2.dpad_down && !gamepad2.dpad_right && !gamepad2.right_bumper && !gamepad2StickTouchingEdge) {
-//             armMoving = false;
-//        }
 
 
 
 
-
-
+//changes the arm speed itself
         if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && armIsUp) {
             armTargetPos += ARM_POS_CHANGE_SPEED;
             setArmPosition();
@@ -190,17 +152,10 @@ public class ArmSubsystem extends BaseSubsystem {
 
 
 
-//        if (-gamepad2.right_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_left) {
-//            ARM_INTAKE_POS += ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
-//        if (-gamepad2.right_stick_y < -ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_left) {
-//            ARM_INTAKE_POS -= ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
 
 
 
+//if you press both left/right trigger, changes the position itself
         if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.right_trigger >= ControllerSubsystem.TRIGGER_THRESHOLD && armIsUp) {
             ARM_HIGH_POS+= ARM_POS_CHANGE_SPEED;
             setArmPosition();
@@ -209,17 +164,6 @@ public class ArmSubsystem extends BaseSubsystem {
             ARM_HIGH_POS -= ARM_POS_CHANGE_SPEED;
             setArmPosition();
         }
-
-
-//
-//        if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_right) {
-//            ARM_MID_POS+= ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
-//        if (-gamepad2.left_stick_y < -ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_right) {
-//            ARM_MID_POS -= ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
 
         if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.left_trigger >= ControllerSubsystem.TRIGGER_THRESHOLD && armIsUp) {
             ARM_LOW_POS+= ARM_POS_CHANGE_SPEED;
@@ -267,9 +211,6 @@ public class ArmSubsystem extends BaseSubsystem {
             boxDown = false;
 
             box.boxServo.setPosition(BoxSubsystem.BOX_DOWN_SLIGHTLY_FORWARD);
-
-//            flipper.disableFlipper = true;
-//            flipper.flipperServo.setPosition(FlipperSubsystem.FLIPPER_UP);
 
             armReset = true;
         }
@@ -336,41 +277,7 @@ public class ArmSubsystem extends BaseSubsystem {
             }
         }
     }
-//    public void armUp(double turretPos) {
-//        if (!armIsMoving) {
-//            armSelectedPos = ARM_INTERMEDIATE_POS;
-//            servoSelectedPos = BoxSubsystem.BOX_HIGH;
-//            turret.targetPos = turretPos;
-//
-//            armMotor.setPower(ARM_POWER);
-//
-//            if (!armIsUp) {
-//                armIsMoving = true;
-//
-//                turret.disableTurret = true;
-//
-//                armTargetPos = ARM_INTERMEDIATE_POS;
-//                setArmPosition();
-//
-//                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-////            flipper.disableFlipper = false;
-//
-//                // action 1
-//                boxUp = true;
-//
-//                // action 2
-//                targetTime1 = runtime.seconds() + ARM_UP_WAIT;
-//
-//                // action 3
-//                targetTime2 = runtime.seconds() + ARM_UP_WAIT;
-//            } else {
-//                armTargetPos = armSelectedPos;
-//                setArmPosition();
-//                box.boxServo.setPosition(servoSelectedPos);
-//            }
-//        }
-//    }
+
 
     public void armReset() {
         if (!armIsMoving) {

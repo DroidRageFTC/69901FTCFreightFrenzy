@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
 public class FlipperSubsystem extends BaseSubsystem {
-    // Values
+    // Values to correctly
     public static double FLIPPER_OPEN = 0.87;
     public static double FLIPPER_CLOSED = 1;
 //    public static double FLIPPER_UP = 0.0;

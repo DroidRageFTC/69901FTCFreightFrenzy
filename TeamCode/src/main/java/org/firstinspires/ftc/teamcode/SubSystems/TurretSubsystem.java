@@ -47,38 +47,11 @@ public class TurretSubsystem extends BaseSubsystem {
         turretMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         turretMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         turretMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-//        turretMotor.setPositionPIDFCoefficients(TURRET_P);
         turretMotor.setPIDFCoefficients(DcMotor.RunMode.RUN_TO_POSITION, armPIDF);
 
         setTurretPosition();
     }
 
-    // Default command
-    public void defaultCommand(Gamepad gamepad1, Gamepad gamepad2) {
-        // Reset
-//        if (gamepad2.a && !disableTurret) {
-//            targetPos = TURRET_SERVOS_FRONT;
-//        }
-//        // right
-//        if (gamepad2.b && !disableTurret) {
-//            targetPos = TURRET_SERVOS_RIGHT;
-//        }
-//        // left
-//        if (gamepad2.x && !disableTurret) {
-//            targetPos = TURRET_SERVOS_LEFT;
-//        }
-////        if (gamepad2.left_stick_x > 0.1 && !disableTurret) {
-////            targetPos += TURRET_SERVOS_SPEED;
-////        }
-////        if (gamepad2.left_stick_x < -0.1 && !disableTurret) {
-////            targetPos -= TURRET_SERVOS_SPEED;
-////        }
-//        if ((gamepad2.a || gamepad2.b || gamepad2.x/* || gamepad2.left_stick_x > 0.1 || gamepad2.left_stick_x < -0.1*/) && !disableTurret) {
-//            setTurretPosition();
-//        }
-
-
-    }
     public void setTurretPosition() {
         turretMotor.setPower(TURRET_POWER);
         turretMotor.setTargetPosition(((int) ((targetPos * TURRET_TICK_PER_REVOLUTION))));

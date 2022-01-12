@@ -15,15 +15,6 @@ public class BaseSubsystem {
     public Telemetry telemetry;
     public ElapsedTime runtime  = new ElapsedTime();
 
-    // Constructors
-    public BaseSubsystem(Gamepad gamepad1, Gamepad gamepad2) {
-        this.gamepad1 = gamepad1;
-        this.gamepad2 = gamepad2;
-    }
-
-    public BaseSubsystem(Telemetry telemetry) {
-        this.telemetry = telemetry;
-    }
     public BaseSubsystem() {
 
     }
