@@ -190,16 +190,6 @@ public class ArmSubsystem extends BaseSubsystem {
 
 
 
-//        if (-gamepad2.right_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_left) {
-//            ARM_INTAKE_POS += ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
-//        if (-gamepad2.right_stick_y < -ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_left) {
-//            ARM_INTAKE_POS -= ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
-
-
 
         if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.right_trigger >= ControllerSubsystem.TRIGGER_THRESHOLD && armIsUp) {
             ARM_HIGH_POS+= ARM_POS_CHANGE_SPEED;
@@ -211,15 +201,7 @@ public class ArmSubsystem extends BaseSubsystem {
         }
 
 
-//
-//        if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_right) {
-//            ARM_MID_POS+= ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
-//        if (-gamepad2.left_stick_y < -ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.dpad_right) {
-//            ARM_MID_POS -= ARM_POS_CHANGE_SPEED;
-//            setArmPosition();
-//        }
+
 
         if (-gamepad2.left_stick_y > ControllerSubsystem.TRIGGER_THRESHOLD && gamepad2.left_trigger >= ControllerSubsystem.TRIGGER_THRESHOLD && armIsUp) {
             ARM_LOW_POS+= ARM_POS_CHANGE_SPEED;
@@ -268,8 +250,6 @@ public class ArmSubsystem extends BaseSubsystem {
 
             box.boxServo.setPosition(BoxSubsystem.BOX_DOWN_SLIGHTLY_FORWARD);
 
-//            flipper.disableFlipper = true;
-//            flipper.flipperServo.setPosition(FlipperSubsystem.FLIPPER_UP);
 
             armReset = true;
         }
