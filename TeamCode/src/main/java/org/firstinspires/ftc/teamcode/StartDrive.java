@@ -116,15 +116,17 @@ public class StartDrive extends OpMode{
         robot.rightFront.setPower(rightPower * speedMultiplier);
 
         //right and left trigger control the intake
-        if (gamepad1.right_trigger >= 0.1)
-                robot.Intake.setPower(1);
+        if (gamepad1.right_trigger >= 0.1) {
+            robot.Intake.setPower(1);
+        }
         if (gamepad1.left_trigger >= 0.1)
-            robot.Intake.setPower(-1);
+        {
+            robot.Intake.setPower(-1);}
         else if (gamepad1.right_trigger < 0.1 && gamepad1.left_trigger < 0.1)
             robot.Intake.setPower(0);
 
-        if(gamepad2.right_trigger>0)
-            robot.Carousel.setPower(0.44);
+        if(gamepad2.right_trigger>0){
+            robot.Carousel.setPower(0.44);}
         else
             robot.Carousel.setPower(0);
 
