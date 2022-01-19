@@ -34,7 +34,7 @@ public class Hardware69 {
     public DcMotor rightRear = null;
     public DcMotor Carousel = null;
     public DcMotor Intake = null;
-    public CRServo carousel = null;
+    public DcMotor carousel = null;
 
     double targetTime;
     double targetTime2;
