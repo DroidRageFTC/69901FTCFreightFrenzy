@@ -124,20 +124,10 @@ public class StartDrive extends OpMode{
             robot.Intake.setPower(0);
 
         if(gamepad2.right_trigger>0)
-            robot.carousel.setPower(0.44);
+            robot.Carousel.setPower(0.44);
         else
-            robot.carousel.setPower(0);
+            robot.Carousel.setPower(0);
 
-        //buttons control the carousel
-        if (gamepad2.b) {
-            robot.carousel.setPower(1);
-        }
-        if (gamepad2.x){
-            robot.carousel.setPower(-1);
-        }
-        if (!gamepad2.b && !gamepad2.x) {
-            robot.carousel.setPower(0);
-        }
 
         //Carsouel moves based on left or right trigger
 //        if (gamepad2.right_trigger >= 0.1)

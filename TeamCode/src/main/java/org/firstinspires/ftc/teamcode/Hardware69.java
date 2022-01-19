@@ -34,7 +34,7 @@ public class Hardware69 {
     public DcMotor rightRear = null;
     public DcMotor Carousel = null;
     public DcMotor Intake = null;
-    public DcMotor carousel = null;
+   // public DcMotor carousel = null;
 
     double targetTime;
     double targetTime2;
@@ -75,7 +75,7 @@ public class Hardware69 {
 //        Gripper = hwMap.get(Servo.class, "Gripper");
        Carousel = hwMap.get(DcMotor.class, "Carousel");
         Intake   = hwMap.get(DcMotor.class,"Intake");
-        carousel = hwMap.get(CRServo.class, "carousel");
+
 //        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
 //        Drop = hwMap.get(Servo.class,"Drop");
 //        Stick = hwMap.get(Servo.class,"Stick");
@@ -84,7 +84,7 @@ public class Hardware69 {
         rightFront.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         leftRear.setDirection(DcMotor.Direction.FORWARD);
         rightRear.setDirection(DcMotor.Direction.REVERSE);
-        carousel.setDirection(DcMotor.Direction.FORWARD);
+        Carousel.setDirection(DcMotor.Direction.FORWARD);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
