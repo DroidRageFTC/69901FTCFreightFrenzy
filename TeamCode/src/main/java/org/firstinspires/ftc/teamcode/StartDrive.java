@@ -124,7 +124,7 @@ public class StartDrive extends OpMode{
             robot.Intake.setPower(0);
 
         if(gamepad2.right_trigger>0)
-            robot.carousel.setPower(0.4);
+            robot.carousel.setPower(0.45);
         else
             robot.carousel.setPower(0);
 
