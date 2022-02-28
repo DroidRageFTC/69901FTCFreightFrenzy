@@ -12,9 +12,8 @@ public class FlipperSubsystem extends BaseSubsystem {
     // Values to correctly
     public static double FLIPPER_OPEN = 0.87;
     public static double FLIPPER_CLOSED = 1;
-//    public static double FLIPPER_UP = 0.0;
-
-//    boolean disableFlipper = true;
+    public static double FLIPPER_UP = 0.0;
+    boolean disableFlipper = true;
 
     // Create hardware variables
     public Servo flipperServo = null;
@@ -23,7 +22,7 @@ public class FlipperSubsystem extends BaseSubsystem {
     // Constructor
     public FlipperSubsystem() {
 
-    }
+   }
 
     // Initialize hardware variables
     public void init(HardwareMap hardwareMap, Telemetry telemetry) {

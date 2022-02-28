@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
  * It uses the common Pushbot hardware class to define the drive on the robot.
@@ -78,6 +79,7 @@ public class Auto69 extends LinearOpMode {
     static final double     DRIVE_SPEED             = 0.3;
     static final double     TURN_SPEED              = 0.3;
 
+    
     @Override
     public void runOpMode() {
 
@@ -95,6 +97,8 @@ public class Auto69 extends LinearOpMode {
         robot.rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.leftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
 
 
         robot.leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

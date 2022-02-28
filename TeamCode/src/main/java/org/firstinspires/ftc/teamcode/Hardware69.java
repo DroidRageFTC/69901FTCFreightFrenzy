@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.SubSystems.BoxSubsystem;
+
 public class Hardware69 {
 
 
@@ -35,23 +37,25 @@ public class Hardware69 {
 //    public Servo Gripper = null;
     public DcMotor leftRear = null;
     public DcMotor rightRear = null;
-//    public DcMotor Carousel = null;
     public DcMotor Intake = null;
-    public CRServo carousel = null;
+    public DcMotor duck = null;
+    public DcMotor slide = null;
+ //   public Servo Box = null;
 
     double targetTime;
     double targetTime2;
     boolean left;
     boolean right;
 
-//    public Servo IntakeServo = null;
-//    public Servo Drop = null;
-//    public Servo Stick = null;
+
 
     public static final double MID_SERVO = 0.9;
     public static final double ARM_UP_POWER = 0.45;
     public static final double ARM_DOWN_POWER = -0.45;
     public static double StickPos = 0;
+    public static double BOX_HIGH_POWER = 0.892;
+    public static double BOX_DOWN_POWER = 0.05;
+
 
     public void setArmPosition(double pos) {
        // Arm.setTargetPosition((int) (1425.06 * pos));
@@ -82,7 +86,12 @@ public class Hardware69 {
 //        Gripper = hwMap.get(Servo.class, "Gripper");
 //        Carousel = hwMap.get(DcMotor.class, "Carousel");
         Intake   = hwMap.get(DcMotor.class,"Intake");
-        carousel = hwMap.get(CRServo.class, "carousel");
+        duck = hwMap.get(DcMotor.class, "duck");
+        slide =hwMap.get(DcMotor.class, "slide");
+        slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        slide.setTargetPosition(0);
+        slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //Box = hwMap.get(Servo.class, "Box");
 //        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
 //        Drop = hwMap.get(Servo.class,"Drop");
 //        Stick = hwMap.get(Servo.class,"Stick");
@@ -91,12 +100,15 @@ public class Hardware69 {
         rightFront.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         leftRear.setDirection(DcMotor.Direction.FORWARD);
         rightRear.setDirection(DcMotor.Direction.REVERSE);
-        carousel.setDirection(DcMotor.Direction.FORWARD);
+        duck.setDirection(DcMotor.Direction.FORWARD);
+        slide.setDirection(DcMotor.Direction.FORWARD);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        duck.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        Intake.setDirection(DcMotor.Direction.FORWARD);
 //        Arm.setDirection(DcMotor.Direction.REVERSE);
         // Set all motors to zero power
@@ -104,6 +116,9 @@ public class Hardware69 {
         leftRear.setPower(0);
         rightFront.setPower(0);
         rightRear.setPower(0);
+        duck.setPower(0);
+        slide.setPower(0);
+
 //        Carousel.setPower(0);
 //        Intake.setPower(0);
 //
@@ -118,17 +133,20 @@ public class Hardware69 {
 
 
 
+
+
            /* leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backleftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             backrightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             */
         // Define and initialize ALL installed servos.
-            /*leftClaw  = hwMap.get(Servo.class, "left_claw");
-            rightClaw = hwMap.get(Servo.class, "right_claw");
-            leftClaw.setPosition(MID_SERVO);
-            rightClaw.setPosition(MID_SERVO);
-            */
+          //  *//leftClaw  = hwMap.get(Servo.class, "left_claw");
+           // rightClaw = hwMap.get(Servo.class, "right_claw");
+           // leftClaw.setPosition(MID_SERVO);
+           // rightClaw.setPosition(MID_SERVO);
+           // */
+
        /* Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Arm.setTargetPosition(0);
         Arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);

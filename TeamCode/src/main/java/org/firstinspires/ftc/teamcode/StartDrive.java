@@ -4,10 +4,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
-import org.firstinspires.ftc.teamcode.SubSystems.ArmSubsystem;
 import org.firstinspires.ftc.teamcode.SubSystems.BoxSubsystem;
 import org.firstinspires.ftc.teamcode.SubSystems.FlipperSubsystem;
-import org.firstinspires.ftc.teamcode.SubSystems.TurretSubsystem;
+
+// import org.firstinspires.ftc.teamcode.SubSystems.ArmSubsystem;
+//import org.firstinspires.ftc.teamcode.SubSystems.BoxSubsystem;
+//import org.firstinspires.ftc.teamcode.SubSystems.FlipperSubsystem;
+//import org.firstinspires.ftc.teamcode.SubSystems.TurretSubsystem;
 
 /**
      * This file provides basic Telop driving for a Pushbot robot.
@@ -32,12 +35,12 @@ public class StartDrive extends OpMode{
     Hardware69 robot       = new Hardware69(); // use the class created to define a Pushbot's hardware
 
     //defines the subsystems in this tele-op
-    ArmSubsystem arm                            = new ArmSubsystem                          ();
+ //   ArmSubsystem arm                            = new ArmSubsystem                          ();
     BoxSubsystem box                            = new BoxSubsystem                          ();
-    TurretSubsystem turret                      = new TurretSubsystem                       ();
+  //  TurretSubsystem turret                      = new TurretSubsystem                       ();
     FlipperSubsystem flipper                    = new FlipperSubsystem                      ();
 
-    double          clawOffset  = 0.0 ;                  // Servo mid position
+  //  double          clawOffset  = 0.0 ;                  // Servo mid position
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -49,9 +52,9 @@ public class StartDrive extends OpMode{
          */
         robot.init(hardwareMap);
 
-        arm.init(hardwareMap, telemetry, box, turret, flipper);
+   //     arm.init(hardwareMap, telemetry, box, turret, flipper);
         box.init(hardwareMap, telemetry);
-        turret.init(hardwareMap, telemetry);
+   //     turret.init(hardwareMap, telemetry);
         flipper.init(hardwareMap,telemetry);
 
         // Send telemetry message to signify robot waiting;
@@ -80,8 +83,8 @@ public class StartDrive extends OpMode{
     {
         flipper.defaultCommand(gamepad1, gamepad2);
         // DO all thecrap with all the arm and stuff
-        arm.findArmPosition(gamepad1, gamepad2);
-        arm.loopCommand();
+     //   arm.findArmPosition(gamepad1, gamepad2);
+       // arm.loopCommand();
 
         double leftPower;
         double rightPower;
@@ -121,27 +124,75 @@ public class StartDrive extends OpMode{
 
 
         //buttons control the carousel
-        if (gamepad2.b) {
-            robot.carousel.setPower(1);
+        if (gamepad1.b) {
+            robot.duck.setPower(.55);
         }
-        if (gamepad2.x){
-            robot.carousel.setPower(-1);
+        if (gamepad1.x){
+            robot.duck.setPower(-1);
         }
-        if (!gamepad2.b && !gamepad2.x) {
-            robot.carousel.setPower(0);
+        if (!gamepad1.b && !gamepad2.x) {
+            robot.duck.setPower(0);
         }
 
+        // flipper is right bumper
+//         if (gamepad2.right_bumper) {
+//             flipper.flipperServo.setPosition(-.9);
+//         }
+//         if (gamepad2.left_bumper) {
+//             flipper.flipperServo.setPosition(.5);
+//         }
+//         if (gamepad2.dpad_left){
+//             flipper.flipperServo.setPosition(0);
+//         }
 
-        // Send telemetry message to signify robot running;
-        telemetry.addData("claw",  "Offset = %.2f", clawOffset);
-        telemetry.addData("left",  "%.2f", leftPower);
-        telemetry.addData("right", "%.2f", rightPower);
+
+        // Box is buttons
+        if (gamepad2.y) {
+            box.Box.setPosition(.7);
+        }
+        if (gamepad2.x) {
+            box.Box.setPosition(-1);
+        }
+        if (gamepad2.b){
+            box.Box.setPosition(.9);
+        }
+        if (gamepad2.a){
+            box.Box.setPosition(.95);
+        }
+
+        // slide is dpad
+        if (gamepad2.dpad_up){
+            robot.slide.setPower(.6);
+            robot.slide.setTargetPosition(-300);
+
+        }
+        if (gamepad2.dpad_down){
+            robot.slide.setPower(-.8);
+            robot.slide.setTargetPosition(0);
+        }
+//        if (!gamepad2.dpad_up && !gamepad2.dpad_down){
+//            robot.slide.setPower(0);
+//        }
+            }
+
+
     }
 
-    /*
-     * Code to run ONCE after the driver hits STOP
-     */
-    @Override
-    public void stop() {
-    }
-}
+
+
+
+
+
+//        // Send telemetry message to signify robot running;
+//        telemetry.addData("claw",  "Offset = %.2f", clawOffset);
+//        telemetry.addData("left",  "%.2f", leftPower);
+//        telemetry.addData("right", "%.2f", rightPower);
+//    }
+//
+//    /*
+//     * Code to run ONCE after the driver hits STOP
+//     */
+//    @Override
+//    public void stop() {
+//    }
+//}
