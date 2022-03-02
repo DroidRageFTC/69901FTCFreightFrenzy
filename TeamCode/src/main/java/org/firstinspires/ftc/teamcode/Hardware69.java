@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.transition.Slide;
+
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -85,7 +88,7 @@ public class Hardware69 {
 //        Pivot = hwMap.get(Servo.class, "Pivot");
 //        Gripper = hwMap.get(Servo.class, "Gripper");
 //        Carousel = hwMap.get(DcMotor.class, "Carousel");
-        Intake   = hwMap.get(DcMotor.class,"Intake");
+        Intake = hwMap.get(DcMotor.class,"Intake");
         duck = hwMap.get(DcMotor.class, "duck");
         slide =hwMap.get(DcMotor.class, "slide");
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -102,6 +105,7 @@ public class Hardware69 {
         rightRear.setDirection(DcMotor.Direction.REVERSE);
         duck.setDirection(DcMotor.Direction.FORWARD);
         slide.setDirection(DcMotor.Direction.FORWARD);
+        Intake.setDirection(DcMotor.Direction.FORWARD);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -109,6 +113,7 @@ public class Hardware69 {
         rightRear.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         duck.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        Intake.setDirection(DcMotor.Direction.FORWARD);
 //        Arm.setDirection(DcMotor.Direction.REVERSE);
         // Set all motors to zero power
@@ -118,6 +123,7 @@ public class Hardware69 {
         rightRear.setPower(0);
         duck.setPower(0);
         slide.setPower(0);
+        Intake.setPower(0);
 
 //        Carousel.setPower(0);
 //        Intake.setPower(0);

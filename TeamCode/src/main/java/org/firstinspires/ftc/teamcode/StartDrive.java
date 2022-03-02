@@ -40,6 +40,7 @@ public class StartDrive extends OpMode{
   //  TurretSubsystem turret                      = new TurretSubsystem                       ();
     FlipperSubsystem flipper                    = new FlipperSubsystem                      ();
 
+
   //  double          clawOffset  = 0.0 ;                  // Servo mid position
     /*
      * Code to run ONCE when the driver hits INIT
@@ -56,6 +57,7 @@ public class StartDrive extends OpMode{
         box.init(hardwareMap, telemetry);
    //     turret.init(hardwareMap, telemetry);
         flipper.init(hardwareMap,telemetry);
+
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Sup Nerd, ", "Get Ready!");
@@ -125,10 +127,10 @@ public class StartDrive extends OpMode{
 
         //buttons control the carousel
         if (gamepad1.b) {
-            robot.duck.setPower(.55);
+            robot.duck.setPower(.35);
         }
         if (gamepad1.x){
-            robot.duck.setPower(-1);
+            robot.duck.setPower(-.6);
         }
         if (!gamepad1.b && !gamepad2.x) {
             robot.duck.setPower(0);
@@ -147,8 +149,8 @@ public class StartDrive extends OpMode{
 
 
         // Box is buttons
-        if (gamepad2.y) {
-            box.Box.setPosition(.7);
+        if (gamepad2.a) {
+            box.Box.setPosition(.8);
         }
         if (gamepad2.x) {
             box.Box.setPosition(-1);
@@ -156,14 +158,11 @@ public class StartDrive extends OpMode{
         if (gamepad2.b){
             box.Box.setPosition(.9);
         }
-        if (gamepad2.a){
-            box.Box.setPosition(.95);
-        }
 
         // slide is dpad
         if (gamepad2.dpad_up){
-            robot.slide.setPower(.6);
-            robot.slide.setTargetPosition(-300);
+            robot.slide.setPower(.8);
+            robot.slide.setTargetPosition(-400);
 
         }
         if (gamepad2.dpad_down){
