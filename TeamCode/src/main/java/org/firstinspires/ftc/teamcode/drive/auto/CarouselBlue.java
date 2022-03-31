@@ -5,6 +5,9 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Hardware69;
+import org.firstinspires.ftc.teamcode.SubSystems.FlipperSubsystem;
+import org.firstinspires.ftc.teamcode.SubSystems.BoxSubsystem;
 import org.firstinspires.ftc.teamcode.drive.Robot;
 import org.firstinspires.ftc.teamcode.trajectorysequenceimproved.TrajectorySequence;
 
@@ -12,29 +15,63 @@ import org.firstinspires.ftc.teamcode.trajectorysequenceimproved.TrajectorySeque
 
 public class CarouselBlue extends LinearOpMode {
 
-    Pose2d startPose = new Pose2d(-30, 63, Math.toRadians(0));
+    Pose2d startPose = new Pose2d(-30, -68, Math.toRadians(-90));
 
     @Override
     public void runOpMode() {
-        Robot drive = new Robot(this, startPose);
+        Robot drive = new Robot(this);
 
+        Hardware69 Robot = new Hardware69();
+        FlipperSubsystem flipper = new FlipperSubsystem();
+        BoxSubsystem Box = new BoxSubsystem();
+        Robot.init(hardwareMap);
+        Box.init(hardwareMap, telemetry);
+        flipper.init( hardwareMap, telemetry);
+        waitForStart();
         drive.setPoseEstimate(startPose);
-
-        TrajectorySequence myTrajectory =  drive.trajectorySequenceBuilder(startPose)
+        TrajectorySequence myTrajectory = drive.trajectorySequenceBuilder(startPose)
                 .setReversed(true)
-                .back(10)
-                .waitSeconds(4)
+                .back(5)
                 .turn(Math.toRadians(90))
-                .splineTo(new Vector2d(-49, 55), Math.toRadians(90))
-
-//                .turn(Math.toRadians(90))
-//                .waitSeconds(4)
+                .addDisplacementMarker(() -> {
+                    Robot.duck.setPower(.35);
+                })
+                .forward(33)
+                .waitSeconds(2)
+                .turn(Math.toRadians(90))
+//                .addDisplacementMarker(() -> {
+//                    Robot.slide.setPower(.8);
+//                })
+                .addDisplacementMarker(() -> {
+                    Robot.duck.setPower(0);
+                })
+//                .addDisplacementMarker(() -> {
+//                    Robot.Intake.setPower(.25);
+//                })
+                .addDisplacementMarker(() -> {
+                    Box.Box.setPosition(.8);
+                })
+                .forward(25)
 //                .turn(Math.toRadians(-90))
-//                .forward(30)
-//                .setReversed(false)
-//                .waitSeconds(4)
-//                .setReversed(true)
-//                                .splineTo(new Vector2d(-60,-33), Math.toRadians(180))
+//                .back(35)
+//                .addDisplacementMarker(() -> {
+//                    flipper.flipperServo.setPosition(.87);
+//                })
+//
+//                .addDisplacementMarker(() -> {
+//                    Robot.Intake.setPower(0);
+//                })
+//                .addDisplacementMarker(() -> {
+//                    Box.Box.setPosition(-1);
+//                })
+//                .addDisplacementMarker(() -> {
+//                    Robot.slide.setPower(-.8);
+//                })
+//
+//                .forward(35)
+//                .turn(Math.toRadians(90))
+//                .back(8)
+
 
                 .build();
 

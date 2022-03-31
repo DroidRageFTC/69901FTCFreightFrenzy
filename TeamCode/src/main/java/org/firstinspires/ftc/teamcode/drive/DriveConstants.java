@@ -119,7 +119,10 @@ public class DriveConstants {
     public static double MAX_ANG_VEL = Math.toRadians(250.5043079608481);
     public static double MAX_ANG_ACCEL = Math.toRadians(274.5043079608481);
 
-
+    public static Slide slide = new Slide();
+    public static class Slide {
+        public static double AUTO_POWER = 1;
+    }
     public static double encoderTicksToInches(double ticks) {
         return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
     }

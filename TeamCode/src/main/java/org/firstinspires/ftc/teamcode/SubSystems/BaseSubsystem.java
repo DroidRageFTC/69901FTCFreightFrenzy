@@ -16,7 +16,6 @@ public class BaseSubsystem {
     public ElapsedTime runtime  = new ElapsedTime();
 
     public BaseSubsystem() {
-
     }
 
     // Initialize Hardware

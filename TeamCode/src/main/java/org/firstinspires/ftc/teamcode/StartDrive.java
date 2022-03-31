@@ -130,7 +130,7 @@ public class StartDrive extends OpMode{
             robot.duck.setPower(.35);
         }
         if (gamepad1.x){
-            robot.duck.setPower(-.6);
+            robot.duck.setPower(-.8);
         }
         if (!gamepad1.b && !gamepad2.x) {
             robot.duck.setPower(0);
@@ -149,15 +149,28 @@ public class StartDrive extends OpMode{
 
 
         // Box is buttons
-        if (gamepad2.a) {
-            box.Box.setPosition(.8);
+        if(gamepad2.a) {
+            box.Box.setPosition(BoxSubsystem.BOX_HIGH);
         }
-        if (gamepad2.x) {
-            box.Box.setPosition(-1);
+        if(gamepad2.x){
+            box.Box.setPosition(BoxSubsystem.BOX_DOWN);
         }
-        if (gamepad2.b){
-            box.Box.setPosition(.9);
+        if(gamepad2.b){
+            box.Box.setPosition(BoxSubsystem.BOX_SHARED);
         }
+        if(gamepad2.y) {
+            box.Box.setPosition(BoxSubsystem.BOX_SHARED);
+        }
+
+//        if (gamepad2.a) {
+//            box.Box.setPosition(.8);
+//        }
+//        if (gamepad2.x) {
+//            box.Box.setPosition(-1);
+//        }
+//        if (gamepad2.b){
+//            box.Box.setPosition(.9);
+//        }
 
         // slide is dpad
         if (gamepad2.dpad_up){

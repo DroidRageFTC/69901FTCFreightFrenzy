@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.SubSystems.BoxSubsystem;
 
-public class Hardware69 {
+public class Hardware69<slide> {
 
 
     /**
@@ -43,13 +43,13 @@ public class Hardware69 {
     public DcMotor Intake = null;
     public DcMotor duck = null;
     public DcMotor slide = null;
- //   public Servo Box = null;
+    public Servo Box = null;
+    public Servo flipperServo = null;
 
     double targetTime;
     double targetTime2;
     boolean left;
     boolean right;
-
 
 
     public static final double MID_SERVO = 0.9;
@@ -94,7 +94,7 @@ public class Hardware69 {
         slide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide.setTargetPosition(0);
         slide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //Box = hwMap.get(Servo.class, "Box");
+//        Box = hwMap.get(Servo.class, "Box");
 //        IntakeServo = hwMap.get(Servo.class,"IntakeServo");
 //        Drop = hwMap.get(Servo.class,"Drop");
 //        Stick = hwMap.get(Servo.class,"Stick");

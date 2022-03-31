@@ -16,7 +16,7 @@ public class FlipperSubsystem extends BaseSubsystem {
     boolean disableFlipper = true;
 
     // Create hardware variables
-    public Servo flipperServo = null;
+    public Servo flipperServo;
 
 
     // Constructor
